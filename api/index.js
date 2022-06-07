@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import productRoute from "../routes/product.js";
+import {default as products} from '../products.js'
 
 dotenv.config({ path: "./config.env" });
 
@@ -13,26 +13,30 @@ app.use(express.json());
 // app.use("/api/products", productRoute);
 
 app.get('/api/products', async (req, res) => {
-  let object={
-      out_of_stock: [],
-      in_stock: []
-  }
- //res.send("display all products");
- await product.find()
- .then(products => {
-     for (const product of products) {
-         if(product.quantity===0){
-             object.out_of_stock.push(product)
-             
-         }else
-         object.in_stock.push(product)
-         //console.log(product.quantity)
-     }
-
-    res.json(object);
- })
- .catch(err => res.status(400).json('Error: ' + err));
+  res.json(products);
 });
+
+// app.get('/api/products', async (req, res) => {
+//   let object={
+//       out_of_stock: [],
+//       in_stock: []
+//   }
+//  //res.send("display all products");
+//  await product.find()
+//  .then(products => {
+//      for (const product of products) {
+//          if(product.quantity===0){
+//              object.out_of_stock.push(product)
+             
+//          }else
+//          object.in_stock.push(product)
+//          //console.log(product.quantity)
+//      }
+
+//     res.json(object);
+//  })
+//  .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 app.get('/api/find/:search',async (req, res) => {
   const {search} = req.params;
