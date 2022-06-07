@@ -19,36 +19,36 @@ const router = express.Router();
     //  .catch(err => res.status(400).json('Error: ' + err));
   //});
 
-  router.get('/', async (req, res) => {
-      let object={
-          out_of_stock: [],
-          in_stock: []
-      }
-     //res.send("display all products");
-     await product.find()
-     .then(products => {
-         for (const product of products) {
-             if(product.quantity===0){
-                 object.out_of_stock.push(product)
+  // router.get('/', async (req, res) => {
+  //     let object={
+  //         out_of_stock: [],
+  //         in_stock: []
+  //     }
+  //    //res.send("display all products");
+  //    await product.find()
+  //    .then(products => {
+  //        for (const product of products) {
+  //            if(product.quantity===0){
+  //                object.out_of_stock.push(product)
                  
-             }else
-             object.in_stock.push(product)
-             //console.log(product.quantity)
-         }
+  //            }else
+  //            object.in_stock.push(product)
+  //            //console.log(product.quantity)
+  //        }
 
-        res.json(object);
-     })
-     .catch(err => res.status(400).json('Error: ' + err));
-  });
+  //       res.json(object);
+  //    })
+  //    .catch(err => res.status(400).json('Error: ' + err));
+  // });
 
 
-  router.get('/find/:search',async (req, res) => {
-      const {search} = req.params;
-    //res.send("search for this product");
-    await product.find({"name": {$regex: search, $options:"i"} }) 
-     .then(products => res.json(products))
-     .catch(err => res.status(400).json('Error: ' + err));
- });
+//   router.get('/find/:search',async (req, res) => {
+//       const {search} = req.params;
+//     //res.send("search for this product");
+//     await product.find({"name": {$regex: search, $options:"i"} }) 
+//      .then(products => res.json(products))
+//      .catch(err => res.status(400).json('Error: ' + err));
+//  });
 
 
 //missing!!!!!
