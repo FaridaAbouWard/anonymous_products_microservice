@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startback": "node index.js",
-    "start": "nodemon index.js",
+    "startback": "node api/index.js",
+    "start": "nodemon api/index.js",
     "start connection":"node mongo.js"
   },
   "keywords": [],
