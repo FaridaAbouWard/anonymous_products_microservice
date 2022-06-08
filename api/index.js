@@ -15,6 +15,13 @@ app.use(express.json());
 app.get('/api/products', async (req, res) => {
   res.json(products);
 });
+app.get('/api/products/find/:search', async (req, res) => {
+  const {search} = req.params;
+  await products.find({"name": {$regex: search, $options:"i"} }) 
+ .then(products => res.json(products))
+ .catch(err => res.status(400).json('Error: ' + err));
+
+});
 
 // app.get('/api/products', async (req, res) => {
 //   let object={
@@ -38,10 +45,12 @@ app.get('/api/products', async (req, res) => {
 //  .catch(err => res.status(400).json('Error: ' + err));
 // });
 
+
+
 app.get('/api/find/:search',async (req, res) => {
   const {search} = req.params;
 //res.send("search for this product");
-await product.find({"name": {$regex: search, $options:"i"} }) 
+await products.find({"name": {$regex: search, $options:"i"} }) 
  .then(products => res.json(products))
  .catch(err => res.status(400).json('Error: ' + err));
 });
